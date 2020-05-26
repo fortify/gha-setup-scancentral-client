@@ -1,0 +1,1 @@
+# Setup Fortify ScanCentral Action

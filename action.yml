@@ -1,0 +1,10 @@
+name: 'Fortify ScanCentral'
+description: 'Add SAST scanning to your GitHub repositories with Fortify ScanCentral and Fortify on Demand'
+author: 'Ruud Senden'
+inputs:
+  args:
+    description: 'Fortify ScanCentral arguments'
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'
