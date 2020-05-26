@@ -42,7 +42,7 @@ async function installAndCache(version) {
 }
 
 async function getCachedRootDir(version) {
-  var cachedToolPath = toolCache.find(TOOL_NAME, version);
+  var cachedToolPath = tc.find(TOOL_NAME, version);
   if (!cachedToolPath) {
     cachedToolPath = await installAndCache(version);
     core.info('Successfully installed '+TOOL_NAME+" version "+version);
@@ -52,6 +52,7 @@ async function getCachedRootDir(version) {
 
 async function run() {
   try {
+	core.startGroup('Setup Fortify ScanCentral Client');
 	const version = core.getInput(INPUT_VERSION);
 	const toolDir = await getCachedRootDir(version);
     const toolBinDir = path.join(toolDir, 'bin');
