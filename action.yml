@@ -1,10 +1,11 @@
-name: 'Fortify ScanCentral'
-description: 'Add SAST scanning to your GitHub repositories with Fortify ScanCentral and Fortify on Demand'
+name: 'Setup Fortify ScanCentral Client'
+description: 'Setup Fortify ScanCentral Client'
 author: 'Ruud Senden'
 inputs:
-  args:
-    description: 'Fortify ScanCentral arguments'
+  version:
+    description: 'Fortify ScanCentral Client version to use'
     required: true
+    default: 20.1.0
 runs:
   using: 'node12'
   main: 'index.js'

@@ -3,21 +3,30 @@ const tc = require('@actions/tool-cache');
 const fs = require('fs-extra');
 const path = require('path');
 
-const TOOL_URL  = 'https://tools.fortify.com/scancentral/Fortify_ScanCentral_Client_20.1.0_x64.zip';
+const INPUT_VERSION = 'version';
 const IS_WINDOWS = process.platform === 'win32';
 
+function getDownloadUrl() {
+	var version = core.getInput(INPUT_VERSION);
+	return 'https://tools.fortify.com/scancentral/Fortify_ScanCentral_Client_'+version+'_x64.zip';
+}
+
 async function downloadAndExtract(url) {
+  core.debug("Downloading "+url);
   const toolZip = await tc.downloadTool(url);
+  core.debug("Extracting "+toolZip);
   const extractPath = await tc.extractZip(toolZip);
   return extractPath;
 }
 
 async function updateBinPermissions(dir) {
   if ( !IS_WINDOWS ) {
+	  core.debug("Updating permissions for files in "+dir);
 	  fs.readdirSync(dir).forEach(file => {
 	  var filePath = path.join(dir, file);
 	  var stat = fs.statSync(filePath);
 	  if (stat.isFile()) {
+		core.debug("Changing permissions for "+toolRootDir+" to 0o555");
 	    fs.chmodSync(filePath, 0o555);
 	  }
 	});
@@ -27,12 +36,9 @@ async function updateBinPermissions(dir) {
 async function run() {
   try {
     core.startGroup('Setup Fortify ScanCentral Client');
-    const toolRootDir = await downloadAndExtract(TOOL_URL);
-    core.info("Tool root dir: "+toolRootDir);
+    const toolRootDir = await downloadAndExtract(getDownloadUrl());
     const toolBinDir = path.join(toolRootDir, 'bin');
-    core.info("Tool bin dir: "+toolBinDir);
     await updateBinPermissions(toolBinDir);
-    core.info("Adding bin dir to path");
     core.addPath(toolBinDir);
   } catch (error) {
     core.setFailed(error.message);
