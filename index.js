@@ -26,9 +26,12 @@ async function updateBinPermissions(dir) {
 
 try {
   core.startGroup('Setup Fortify ScanCentral Client');
-  const toolRootPath = downloadAndExtract(TOOL_URL);
-  const toolBinDir = path.join(toolRootPath, 'bin');
+  const toolRootDir = downloadAndExtract(TOOL_URL);
+  core.info("Tool root dir: "+toolRootDir);
+  const toolBinDir = path.join(toolRootDir, 'bin');
+  core.info("Tool bin dir: "+toolBinDir);
   updateBinPermissions(toolBinDir);
+  core.info("Adding bin dir to path");
   core.addPath(toolBinDir);
 } catch (error) {
   core.setFailed(error.message);
