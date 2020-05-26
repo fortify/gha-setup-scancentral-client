@@ -28,7 +28,7 @@ try {
   core.startGroup('Setup Fortify ScanCentral Client');
   const toolRootPath = downloadAndExtract(TOOL_URL);
   const toolBinDir = path.join(toolRootPath, 'bin');
-  await updateBinPermissions(toolBinDir);
+  updateBinPermissions(toolBinDir);
   core.addPath(toolBinDir);
 } catch (error) {
   core.setFailed(error.message);
