@@ -26,7 +26,7 @@ async function updateBinPermissions(dir) {
 
 try {
   core.startGroup('Setup Fortify ScanCentral Client');
-  const toolRootPath = await downloadAndExtract(TOOL_URL);
+  const toolRootPath = downloadAndExtract(TOOL_URL);
   const toolBinDir = path.join(toolRootPath, 'bin');
   await updateBinPermissions(toolBinDir);
   core.addPath(toolBinDir);
