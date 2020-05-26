@@ -26,7 +26,7 @@ async function updateBinPermissions(dir) {
 	  var filePath = path.join(dir, file);
 	  var stat = fs.statSync(filePath);
 	  if (stat.isFile()) {
-		core.debug("Changing permissions for "+toolRootDir+" to 0o555");
+		core.debug("Changing permissions for "+filePath+" to 0o555");
 	    fs.chmodSync(filePath, 0o555);
 	  }
 	});
