@@ -4,10 +4,10 @@ const fs = require('fs-extra');
 const path = require('path');
 
 const INPUT_VERSION = 'version';
+const TOOL_NAME = 'Fortify ScanCentral';
 const IS_WINDOWS = process.platform === 'win32';
 
-function getDownloadUrl() {
-	var version = core.getInput(INPUT_VERSION);
+function getDownloadUrl(version) {
 	return 'https://tools.fortify.com/scancentral/Fortify_ScanCentral_Client_'+version+'_x64.zip';
 }
 
@@ -33,12 +33,28 @@ async function updateBinPermissions(dir) {
   }
 }
 
+async function installAndCache(version) {
+  const toolRootDir = await downloadAndExtract(getDownloadUrl(version));
+  const toolBinDir = path.join(toolRootDir, 'bin');
+  await updateBinPermissions(toolBinDir);
+  const cachedRootDir = await tc.cacheDir(toolRootDir, TOOL_NAME, version);
+  return cachedRootDir;
+}
+
+async function getCachedRootDir(version) {
+  var cachedToolPath = toolCache.find(TOOL_NAME, version);
+  if (!cachedToolPath) {
+    cachedToolPath = await installAndCache(version);
+    core.info('Successfully installed '+TOOL_NAME+" version "+version);
+  }
+  return cachedToolPath;
+}
+
 async function run() {
   try {
-    core.startGroup('Setup Fortify ScanCentral Client');
-    const toolRootDir = await downloadAndExtract(getDownloadUrl());
-    const toolBinDir = path.join(toolRootDir, 'bin');
-    await updateBinPermissions(toolBinDir);
+	const version = core.getInput(INPUT_VERSION);
+	const toolDir = await getCachedRootDir(version);
+    const toolBinDir = path.join(toolDir, 'bin');
     core.addPath(toolBinDir);
   } catch (error) {
     core.setFailed(error.message);
