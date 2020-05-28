@@ -16,6 +16,11 @@ steps:
   with:
     version: 20.1.0                                 # Optional as 20.1.0 is the default (and currently only version available)
 - run: scancentral package -bt mvn -o sample.zip    # Run Fortify ScanCentral Client
+- uses: actions/upload-artifact@v2                  # Archive ScanCentral Client logs on failure
+  if: failure()
+    with:
+      name: scancentral-logs
+      path: ~/.fortify/scancentral/log
 ```
 
 As can be seen in this example, the ScanCentral Client can simply be invoked using the `run` directive just like you would run the client from the command line or from a script. You can run any available client action, and even invoke the other commands shipped with CloudScan Client like `pwtool`. The following sections describe the main use cases.
@@ -32,6 +37,11 @@ steps:
     java-version: 1.8
 - uses: fortify-actions/setup-scancentral-client@v1
 - run: scancentral -url http://scancentral:8080/sc-ctrl start -bt mvn -upload -application "My Application" -version "1.0" -uptoken 00000000-0000-0000-0000-0000000
+- uses: actions/upload-artifact@v2
+  if: failure()
+  with:
+    name: scancentral-logs
+    path: ~/.fortify/scancentral/log
 ```
 
 Obviously, the ScanCentral Controller must be accessible from the GitHub Runner used to run this workflow.
@@ -48,13 +58,17 @@ steps:
     java-version: 1.8
 - uses: fortify-actions/setup-scancentral-client@v1
 - uses: fortify-actions/setup-fod-uploader@v1
-- env:
+- run: scancentral package -bt mvn -o package.zip
+- run: java -jar $FOD_UPLOAD_JAR -bsi "$FOD_BSI" -z package.zip -uc "$FOD_USER" "$FOD_PWD" -ep 2 -pp 1
+  env:
     FOD_BSI: ${{ secrets.FOD_BSI }}
     FOD_USER: ${{ secrets.FOD_USER }}
     FOD_PWD: ${{ secrets.FOD_PWD }}
-  run: |
-    scancentral package -bt mvn -o sample.zip
-    java -jar $FOD_UPLOAD_JAR -bsi "$FOD_BSI" -z sample.zip -uc "$FOD_USER" "$FOD_PWD" -ep 2 -pp 1
+- uses: actions/upload-artifact@v2
+  if: failure()
+  with:
+    name: scancentral-logs
+    path: ~/.fortify/scancentral/log
 ```
 
 In this example, ScanCentral Client is used to package the source code into the sample.zip file, and this same zip file is then uploaded to FoD by invoking FoD Uploader.
