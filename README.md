@@ -18,9 +18,9 @@ steps:
 - run: scancentral package -bt mvn -o sample.zip    # Run Fortify ScanCentral Client
 - uses: actions/upload-artifact@v2                  # Archive ScanCentral Client logs on failure
   if: failure()
-    with:
-      name: scancentral-logs
-      path: ~/.fortify/scancentral/log
+  with:
+    name: scancentral-logs
+    path: ~/.fortify/scancentral/log
 ```
 
 As can be seen in this example, the ScanCentral Client can simply be invoked using the `run` directive just like you would run the client from the command line or from a script. You can run any available client action, and even invoke the other commands shipped with CloudScan Client like `pwtool`. The following sections describe the main use cases.
