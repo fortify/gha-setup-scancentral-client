@@ -12,7 +12,7 @@ steps:
 - uses: actions/setup-java@v1                       # Set up Java (required by ScanCentral Client and for actual build)
   with:
     java-version: 1.8
-- uses: fortify-actions/setup-scancentral-client@v1 # Set up Fortify ScanCentral Client
+- uses: fortify/gha-setup-scancentral-client@v1 # Set up Fortify ScanCentral Client
   with:
     version: 20.1.0                                 # Optional as 20.1.0 is the default (and currently only version available)
 - run: scancentral package -bt mvn -o sample.zip    # Run Fortify ScanCentral Client
@@ -35,7 +35,7 @@ steps:
 - uses: actions/setup-java@v1
   with:
     java-version: 1.8
-- uses: fortify-actions/setup-scancentral-client@v1
+- uses: fortify/gha-setup-scancentral-client@v1
 - run: scancentral -url http://scancentral:8080/sc-ctrl start -bt mvn -upload -application "My Application" -version "1.0" -uptoken 00000000-0000-0000-0000-0000000
 - uses: actions/upload-artifact@v2
   if: failure()
@@ -48,7 +48,7 @@ Obviously, the ScanCentral Controller must be accessible from the GitHub Runner 
 
 ### Submit scan requests to Fortify on Demand
 
-In this scenario, you would use the ScanCentral Client to package the source code and dependencies into a zip file, which can then be uploaded to Fortify on Demand using FoD Uploader. This can be accomplished by adding the [setup-fod-uploader](https://github.com/fortify-actions/setup-fod-uploader) action to the workflow, resulting in a workflow like the following:
+In this scenario, you would use the ScanCentral Client to package the source code and dependencies into a zip file, which can then be uploaded to Fortify on Demand using FoD Uploader. This can be accomplished by adding the [gha-setup-fod-uploader](https://github.com/fortify/gha-setup-fod-uploader) action to the workflow, resulting in a workflow like the following:
 
 ```yaml
 steps:
@@ -56,8 +56,8 @@ steps:
 - uses: actions/setup-java@v1
   with:
     java-version: 1.8
-- uses: fortify-actions/setup-scancentral-client@v1
-- uses: fortify-actions/setup-fod-uploader@v1
+- uses: fortify/gha-setup-scancentral-client@v1
+- uses: fortify/gha-setup-fod-uploader@v1
 - run: scancentral package -bt mvn -o package.zip
 - run: java -jar $FOD_UPLOAD_JAR -bsi "$FOD_BSI" -z package.zip -uc "$FOD_USER" "$FOD_PWD" -ep 2 -pp 1
   env:
