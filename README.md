@@ -24,7 +24,7 @@ jobs:
       - uses: fortify/gha-setup-scancentral-client@v1   # Set up Fortify ScanCentral Client
         with:
           version: 20.1.0                               # Optional as 20.1.0 is the default (and currently only version available)
-		# Run Fortify ScanCentral Client
+        # Run Fortify ScanCentral Client
       - run: scancentral -url http://scancentral:8080/sc-ctrl start -bt mvn -upload -application "My Application" -version "1.0" -uptoken 00000000-0000-0000-0000-0000000
       - uses: actions/upload-artifact@v2                # Archive ScanCentral Client logs on failure
         if: failure()
