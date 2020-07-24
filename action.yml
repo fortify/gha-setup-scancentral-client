@@ -1,5 +1,5 @@
-name: 'Setup Fortify ScanCentral Client'
-description: 'Setup Fortify ScanCentral Client'
+name: 'Fortify ScanCentral Scan'
+description: 'Build secure software fast with Fortify SAST scans'
 author: 'Ruud Senden'
 inputs:
   version:
@@ -9,3 +9,6 @@ inputs:
 runs:
   using: 'node12'
   main: 'dist/index.js'
+branding:
+  icon: 'shield'
+  color: 'blue'
