@@ -6,8 +6,7 @@ Build secure software fast with [Fortify](https://www.microfocus.com/en-us/solut
 
 ## Usage
 
-The following example GitHub workflow illustrates how to invoke ScanCentral Client from within a GitHub
-workflow:
+The following example illustrates how to invoke ScanCentral Client from within a GitHub workflow:
 
 ```yaml
 name: Fortify ScanCentral SAST                          # Name of this workflow
@@ -31,7 +30,10 @@ jobs:
         with:
           version: 20.1.0                               # Optional as 20.1.0 is the default (and currently only version available)
         # Run Fortify ScanCentral Client. Update based on your build tool, technology and Fortify ScanCentral details
-      - run: scancentral -url http://scancentral:8080/sc-ctrl start -bt mvn -upload -application "My Application" -version "1.0" -uptoken 00000000-0000-0000-0000-0000000
+      - run: scancentral -url ${URL} start -bt mvn -upload -application "My Application" -version "1.0" -uptoken $TOKEN
+        env:                                            
+          URL: ${{ secrets.SC_URL }}
+		  TOKEN: ${{ secrets.SSC_UPLOAD_TOKEN }}
       - uses: actions/upload-artifact@v2                # Archive ScanCentral Client logs on failure
         if: failure()
         with:
@@ -39,9 +41,10 @@ jobs:
            path: ~/.fortify/scancentral/log
 ```
 
-As shown in this example, the ScanCentral Client is invoked using the `run` directive just like 
-you would invoke the client from the command line or from a script. You can run any available client action like 
-`start` or `package`, and even invoke the other commands shipped with ScanCentral Client like `pwtool`.  For more information on invoking the ScanCentral client, please see the [ScanCentral documentation](https://www.microfocus.com/documentation/fortify-software-security-center/2010/ScanCentral_Help_20.1.0/index.htm#Submit_Job.htm%3FTocPath%3DSubmitting%2520Scan%2520Requests%7C_____0).
+This example workflow demonstrates the use of the `fortify/gha-setup-scancentral-client` action to set up ScanCentral Client, and then invoking ScanCentral Client similar to how you would manually 
+run this command from a command line. You can run any available client action like `start` or `package`, and even invoke the other commands shipped with ScanCentral Client like `pwtool`. Please
+see the [ScanCentral documentation](https://www.microfocus.com/documentation/fortify-software-security-center/2010/ScanCentral_Help_20.1.0/index.htm#Submit_Job.htm%3FTocPath%3DSubmitting%2520Scan%2520Requests%7C_____0)
+for details. All potentially sensitive data should be stored in the GitHub secrets storage.
 
 Following are the most common use cases for this GitHub Action:
 
