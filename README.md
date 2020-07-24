@@ -1,6 +1,6 @@
 # Setup Fortify ScanCentral Client
 
-Build secure software fast with [Fortify](https://www.microfocus.com/en-us/solutions/application-security). This GitHub Action sets up the Fortify ScanCentral Client to integrate Static Application Security Testing (SAST) into your GitHub workflows.  This action:
+Build secure software fast with [Fortify](https://www.microfocus.com/en-us/solutions/application-security). This GitHub Action sets up the Fortify ScanCentral Client to integrate Static Application Security Testing (SAST) into your GitHub workflows. This action:
 * Downloads, extracts and caches the specified version of the Fortify ScanCentral Client zip file
 * Adds the Fortify ScanCentral Client bin-directory to the path
 
@@ -40,8 +40,8 @@ jobs:
 ```
 
 As shown in this example, the ScanCentral Client is invoked using the `run` directive just like 
-you would run the client from the command line or from a script. You can run any available client action like 
-`start` or `package`, and even invoke the other commands shipped with ScanCentral Client like `pwtool`.  For more information on invoking the ScanCentral client Please see the [ScanCentral documentation](https://www.microfocus.com/documentation/fortify-software-security-center/2010/ScanCentral_Help_20.1.0/index.htm#Submit_Job.htm%3FTocPath%3DSubmitting%2520Scan%2520Requests%7C_____0) for more information.
+you would invoke the client from the command line or from a script. You can run any available client action like 
+`start` or `package`, and even invoke the other commands shipped with ScanCentral Client like `pwtool`.  For more information on invoking the ScanCentral client, please see the [ScanCentral documentation](https://www.microfocus.com/documentation/fortify-software-security-center/2010/ScanCentral_Help_20.1.0/index.htm#Submit_Job.htm%3FTocPath%3DSubmitting%2520Scan%2520Requests%7C_____0).
 
 Following are the most common use cases for this GitHub Action:
 
