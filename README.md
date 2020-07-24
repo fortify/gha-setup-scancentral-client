@@ -36,7 +36,7 @@ jobs:
       # (Update based on your build tool, technology and Fortify ScanCentral details)
       - run: scancentral -url ${URL} start -bt mvn -upload -application "My Application" -version "1.0" -uptoken $TOKEN
         env:                                            
-          URL: ${{ secrets.SC_URL }}
+          URL: ${{ secrets.SSC_URL }}
           TOKEN: ${{ secrets.SSC_UPLOAD_TOKEN }}
 
       ### Archive ScanCentral Client logs on failure ###
@@ -59,13 +59,15 @@ Following are the most common use cases for this GitHub Action:
 * Start a scan on Fortify on Demand (FoD), utilizing ScanCentral Client for packaging only; see 
   https://github.com/fortify/gha-setup-fod-uploader for details
 
+## Additional Considerations
+* In order to utilize the ScanCentral Client for packaging .NET code, you will need to modify the sample workflow to utilize a Windows runner. Windows-based runners use different syntax and different file locations. In particular:
+    * Environment variables are referenced as `$Env:var` instead of `$var`, for example `"$Env:URL"` instead of `$URL`
+    * ScanCentral logs are stored in a different location, so the upload-artifact step would need to be adjusted accordingly if you wish to archive ScanCentral logs
+* Be sure to consider the appropriate event triggers for your project and branching strategy
+* If you are not already a Fortify customer, check out our [Free Trial](https://www.microfocus.com/en-us/products/application-security-testing/free-trial)
 
 ## Inputs
 
 ### `version`
 **Required** The version of the Fortify ScanCentral Client to be set up. Default `20.1.0`.
 
-## Additional Considerations
-* In order to utilize the ScanCentral Client for packaging .NET code, you will need to modify the sample workflow to utilize a Windows runner.
-* Be sure to consider the appropriate event triggers for your project and branching strategy
-* If you are not already a Fortify customer, check out our [Free Trial](https://www.microfocus.com/en-us/products/application-security-testing/free-trial)
