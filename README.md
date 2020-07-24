@@ -33,7 +33,7 @@ jobs:
           version: 20.1.0                               # Optional as 20.1.0 is the default (and currently only version available)
 
       ### Run Fortify ScanCentral Client ###
-	  # (Update based on your build tool, technology and Fortify ScanCentral details)
+      # (Update based on your build tool, technology and Fortify ScanCentral details)
       - run: scancentral -url ${URL} start -bt mvn -upload -application "My Application" -version "1.0" -uptoken $TOKEN
         env:                                            
           URL: ${{ secrets.SC_URL }}
