@@ -9,7 +9,7 @@ Build secure software fast with [Fortify](https://www.microfocus.com/en-us/solut
 The following example illustrates how to invoke ScanCentral Client from within a GitHub workflow:
 
 ```yaml
-name: Fortify ScanCentral SAST                          # Name of this workflow
+name: Fortify ScanCentral SAST Scan                     # Name of this workflow
 on:
   push:                                                 # Perform Fortify SAST on push and/or pull requests
     branches:
@@ -29,7 +29,8 @@ jobs:
       - uses: fortify/gha-setup-scancentral-client@v1   # Set up Fortify ScanCentral Client
         with:
           version: 20.1.0                               # Optional as 20.1.0 is the default (and currently only version available)
-        # Run Fortify ScanCentral Client. Update based on your build tool, technology and Fortify ScanCentral details
+                                                        # Run Fortify ScanCentral Client. Update based on your build tool, technology 
+                                                        # and Fortify ScanCentral details
       - run: scancentral -url ${URL} start -bt mvn -upload -application "My Application" -version "1.0" -uptoken $TOKEN
         env:                                            
           URL: ${{ secrets.SC_URL }}
