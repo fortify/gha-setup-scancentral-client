@@ -26,7 +26,7 @@ jobs:
       - uses: actions/setup-java@v1                     # Set up Java (required by ScanCentral Client and for actual build)
         with:
           java-version: 1.8
-		  
+
       - uses: fortify/gha-setup-scancentral-client@v1   # Set up Fortify ScanCentral Client
         with:
           version: 20.1.0                               # Optional as 20.1.0 is the default (and currently only version available)
