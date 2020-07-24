@@ -26,15 +26,18 @@ jobs:
       - uses: actions/setup-java@v1                     # Set up Java (required by ScanCentral Client and for actual build)
         with:
           java-version: 1.8
+		  
       - uses: fortify/gha-setup-scancentral-client@v1   # Set up Fortify ScanCentral Client
         with:
           version: 20.1.0                               # Optional as 20.1.0 is the default (and currently only version available)
+
                                                         # Run Fortify ScanCentral Client. Update based on your build tool, technology 
                                                         # and Fortify ScanCentral details
       - run: scancentral -url ${URL} start -bt mvn -upload -application "My Application" -version "1.0" -uptoken $TOKEN
         env:                                            
           URL: ${{ secrets.SC_URL }}
-		  TOKEN: ${{ secrets.SSC_UPLOAD_TOKEN }}
+          TOKEN: ${{ secrets.SSC_UPLOAD_TOKEN }}
+
       - uses: actions/upload-artifact@v2                # Archive ScanCentral Client logs on failure
         if: failure()
         with:
