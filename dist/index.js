@@ -5854,6 +5854,7 @@ const fs = __importStar(__webpack_require__(517));
 const path = __importStar(__webpack_require__(622));
 const INPUT_VERSION = 'version';
 const TOOL_NAME = 'Fortify ScanCentral';
+const CLIENT_AUTH_TOKEN = "client-auth-token";
 const IS_WINDOWS = process.platform === 'win32';
 function getDownloadUrl(version) {
     return 'https://tools.fortify.com/scancentral/Fortify_ScanCentral_Client_' + version + '_x64.zip';
@@ -5901,12 +5902,23 @@ function getCachedRootDir(version) {
         return cachedToolPath;
     });
 }
+function addClientProperties(toolDir) {
+    return __awaiter(this, void 0, void 0, function* () {
+        var clientProperties = `${toolDir}/Core/config/client.properties`;
+        var clientAuthToken = core.getInput(CLIENT_AUTH_TOKEN);
+        yield fs.ensureFile(clientProperties);
+        if (clientAuthToken) {
+            fs.writeFile(clientProperties, `client_auth_token=${clientAuthToken}`);
+        }
+    });
+}
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             core.startGroup('Setup Fortify ScanCentral Client');
             const version = core.getInput(INPUT_VERSION);
             const toolDir = yield getCachedRootDir(version);
+            yield addClientProperties(toolDir);
             const toolBinDir = path.join(toolDir, 'bin');
             core.addPath(toolBinDir);
         }

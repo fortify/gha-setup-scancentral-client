@@ -31,6 +31,7 @@ jobs:
       - uses: fortify/gha-setup-scancentral-client@v1   
         with:
           version: 20.1.0                               # Optional as 20.1.0 is the default (and currently only version available)
+          client-auth-token: SomeAuthToken              # Optional, but required if ScanCentral Controller requires client authentication
 
       ### Run Fortify ScanCentral Client ###
       # (Update based on your build tool, technology and Fortify ScanCentral details)
@@ -70,4 +71,7 @@ Following are the most common use cases for this GitHub Action:
 
 ### `version`
 **Required** The version of the Fortify ScanCentral Client to be set up. Default `20.1.0`.
+
+### `client-auth-token`
+**Optional** Client authentication token to pass to ScanCentral Controller. Required if ScanCentral Controller accepts authorized clients only.
 

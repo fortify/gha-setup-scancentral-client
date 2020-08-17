@@ -6,6 +6,9 @@ inputs:
     description: 'Fortify ScanCentral Client version to use'
     required: true
     default: 20.1.0
+  client-auth-token:
+    description: 'ScanCentral client authentication token'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'

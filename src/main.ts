@@ -5,6 +5,7 @@ import * as path from 'path';
 
 const INPUT_VERSION = 'version';
 const TOOL_NAME = 'Fortify ScanCentral';
+const CLIENT_AUTH_TOKEN = "client-auth-token"
 const IS_WINDOWS = process.platform === 'win32';
 
 function getDownloadUrl(version: string): string {
@@ -50,11 +51,21 @@ async function getCachedRootDir(version: string): Promise<string> {
   return cachedToolPath;
 }
 
+async function addClientProperties(toolDir: string): Promise<void> {
+  var clientProperties = `${toolDir}/Core/config/client.properties`
+  var clientAuthToken = core.getInput(CLIENT_AUTH_TOKEN);
+  await fs.ensureFile(clientProperties);
+  if ( clientAuthToken ) {
+    fs.writeFile(clientProperties, `client_auth_token=${clientAuthToken}`);
+  }
+}
+
 async function main(): Promise<void> {
   try {
     core.startGroup('Setup Fortify ScanCentral Client');
     const version = core.getInput(INPUT_VERSION);
     const toolDir = await getCachedRootDir(version);
+    await addClientProperties(toolDir);
     const toolBinDir = path.join(toolDir, 'bin');
     core.addPath(toolBinDir);
   } catch (error) {
