@@ -9,9 +9,9 @@ Build secure software fast with [Fortify](https://www.microfocus.com/en-us/solut
 The following example illustrates how to invoke ScanCentral Client from within a GitHub workflow:
 
 ```yaml
-name: Fortify ScanCentral SAST Scan                     # Name of this workflow
+name: Fortify ScanCentral SAST Scan                            # Name of this workflow
 on:
-  push:                                                 # Perform Fortify SAST on push and/or pull requests
+  push:                                                        # Perform Fortify SAST on push and/or pull requests
     branches:
       - master
   pull_request:
@@ -19,19 +19,19 @@ on:
       - master
 jobs:                                                  
   build:
-    runs-on: ubuntu-latest                              # Use the appropriate runner for building your source code
+    runs-on: ubuntu-latest                                     # Use the appropriate runner for building your source code
 
     steps:
-      - uses: actions/checkout@v2                       # Check out source code
-      - uses: actions/setup-java@v1                     # Set up Java (required by ScanCentral Client and for actual build)
+      - uses: actions/checkout@v2                              # Check out source code
+      - uses: actions/setup-java@v1                            # Set up Java (required by ScanCentral Client and for actual build)
         with:
           java-version: 1.8
 
       ### Set up Fortify ScanCentral Client ###
       - uses: fortify/gha-setup-scancentral-client@v1   
         with:
-          version: 20.1.0                               # Optional as 20.1.0 is the default (and currently only version available)
-          client-auth-token: SomeAuthToken              # Optional, but required if ScanCentral Controller requires client authentication
+          version: 20.1.0                                      # Optional as 20.1.0 is the default (and currently only version available)
+          client-auth-token: ${{ secrets.CLIENT_AUTH_TOKEN }}  # Optional, but required if ScanCentral Controller requires client authentication
 
       ### Run Fortify ScanCentral Client ###
       # (Update based on your build tool, technology and Fortify ScanCentral details)
