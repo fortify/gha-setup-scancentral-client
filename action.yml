@@ -1,6 +1,6 @@
 name: 'Fortify ScanCentral Scan'
 description: 'Build secure software fast with Fortify SAST scans'
-author: 'Ruud Senden'
+author: 'Fortify'
 inputs:
   version:
     description: 'Fortify ScanCentral Client version to use'
