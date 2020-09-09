@@ -20,7 +20,8 @@ on:
 
 jobs:                                                  
   Fortify-SAST:
-    runs-on: ubuntu-latest                                     # Use the appropriate runner for building your source code
+    # Use the appropriate runner for building your source code
+    runs-on: ubuntu-latest                                     
 
       # Check out source code
       - name: Check Out Source Code
@@ -31,7 +32,7 @@ jobs:
       # If this run was triggered by a pull request event, then checkout the head of the pull request instead of the merge commit.
       - run: git checkout HEAD^2
         if: ${{ github.event_name == 'pull_request' }}      
-      # Java 8 required by ScanCentral Client and FoD Uploader (Universal CI Tool)
+      # Java 8 required by ScanCentral Client
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
