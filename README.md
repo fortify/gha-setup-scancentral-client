@@ -11,36 +11,54 @@ The following example illustrates how to invoke ScanCentral Client from within a
 ```yaml
 name: Fortify ScanCentral SAST Scan                            # Name of this workflow
 on:
-  push:                                                        # Perform Fortify SAST on push and/or pull requests
-    branches:
-      - master
+  workflow_dispatch:
+  push:
+    branches: [master]
   pull_request:
-    branches:
-      - master
+    # The branches below must be a subset of the branches above
+    branches: [master]
+
 jobs:                                                  
-  build:
+  Fortify-SAST:
     runs-on: ubuntu-latest                                     # Use the appropriate runner for building your source code
 
-    steps:
-      - uses: actions/checkout@v2                              # Check out source code
-      - uses: actions/setup-java@v1                            # Set up Java (required by ScanCentral Client and for actual build)
+      # Check out source code
+      - name: Check Out Source Code
+        uses: actions/checkout@v2
+        with:
+          # Fetch at least the immediate parents so that if this is a pull request then we can checkout the head.
+          fetch-depth: 2
+      # If this run was triggered by a pull request event, then checkout the head of the pull request instead of the merge commit.
+      - run: git checkout HEAD^2
+        if: ${{ github.event_name == 'pull_request' }}      
+      # Java 8 required by ScanCentral Client and FoD Uploader (Universal CI Tool)
+      - name: Setup Java
+        uses: actions/setup-java@v1
         with:
           java-version: 1.8
 
       ### Set up Fortify ScanCentral Client ###
+      - name: Download Fortify ScanCentral Client
       - uses: fortify/gha-setup-scancentral-client@v1   
         with:
           version: 20.1.0                                      # Optional as 20.1.0 is the default (and currently only version available)
           client-auth-token: ${{ secrets.CLIENT_AUTH_TOKEN }}  # Optional, but required if ScanCentral Controller requires client authentication
 
       ### Run Fortify ScanCentral Client ###
-      # (Update based on your build tool, technology and Fortify ScanCentral details)
-      - run: scancentral -url ${URL} start -bt mvn -upload -application "My Application" -version "1.0" -uptoken $TOKEN
+      # Update BUILD_OPTS based on the ScanCentral Client documentation and your project's included tech stack(s).
+      #   ScanCentral Client will download dependencies for maven, gradle and msbuild projects.
+      #   For other build tools, add your build commands to the workflow to download necessary dependencies and prepare according to Fortify SCA documentation.
+      - name: Perform SAST Scan
+      - run: scancentral -url ${URL} start $BUILD_OPTS -upload -application $APPLICATION -version $VERSION -uptoken $TOKEN
         env:                                            
           URL: ${{ secrets.SSC_URL }}
           TOKEN: ${{ secrets.SSC_UPLOAD_TOKEN }}
+          APPLICATION: "My Application"
+          VERSION: "1.0"
+          BUILD_OPTS: "-bt mvn"
 
       ### Archive ScanCentral Client logs on failure ###
+      - name: Save ScanCentral Logs
       - uses: actions/upload-artifact@v2                
         if: failure()
         with:
@@ -70,7 +88,7 @@ Following are the most common use cases for this GitHub Action:
 ## Inputs
 
 ### `version`
-**Required** The version of the Fortify ScanCentral Client to be set up. Default `20.1.0`.
+**Required** The version of the Fortify ScanCentral Client to be set up. Default if not specified is `20.1.0`.
 
 ### `client-auth-token`
 **Optional** Client authentication token to pass to ScanCentral Controller. Required if ScanCentral Controller accepts authorized clients only.
