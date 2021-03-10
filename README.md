@@ -13,6 +13,7 @@ name: Fortify ScanCentral SAST Scan
 on:
   workflow_dispatch:
   push:
+    # Master or main branch that you want to trigger this workflow for
     branches: [master]
   pull_request:
     # The branches below must be a subset of the branches above
@@ -21,8 +22,9 @@ on:
 jobs:                                                  
   Fortify-SAST:
     # Use the appropriate runner for building your source code
-    runs-on: ubuntu-latest                                     
-
+    runs-on: ubuntu-latest 
+	
+    steps:
       # Check out source code
       - name: Check Out Source Code
         uses: actions/checkout@v2
@@ -31,16 +33,19 @@ jobs:
           fetch-depth: 2
       # If this run was triggered by a pull request event, then checkout the head of the pull request instead of the merge commit.
       - run: git checkout HEAD^2
-        if: ${{ github.event_name == 'pull_request' }}      
-      # Java 8 required by ScanCentral Client
+        if: ${{ github.event_name == 'pull_request' }} 
+		
+      # Java is required to run ScanCentral Client, and may be required for your build
+	  # Java version to use depends on the Java version required to run your build (if any),
+	  # and the Java version supported by the ScanCentral Client version that you are running
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: 11
 
       ### Set up Fortify ScanCentral Client ###
       - name: Download Fortify ScanCentral Client
-      - uses: fortify/gha-setup-scancentral-client@@v1.1.1   
+      - uses: fortify/gha-setup-scancentral-client@v1.1.1   
         with:
           version: 20.2.0                                      # Optional as 20.2.0 is the default
           client-auth-token: ${{ secrets.CLIENT_AUTH_TOKEN }}  # Optional, but required if ScanCentral Controller requires client authentication
@@ -89,7 +94,10 @@ Following are the most common use cases for this GitHub Action:
 ## Inputs
 
 ### `version`
-**Required** The version of the Fortify ScanCentral Client to be set up. Default if not specified is `20.2.0`. 
+**Required** The version of the Fortify ScanCentral Client to be set up. Default if not specified is `20.2.0`. At the time of writing, the following versions are available:
+
+* `20.2.0`
+* `20.1.0`
 
 ### `client-auth-token`
 **Optional** Client authentication token to pass to ScanCentral Controller. Required if ScanCentral Controller accepts authorized clients only.
