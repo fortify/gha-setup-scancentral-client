@@ -1,5 +1,5 @@
 {
-  "name": "setup-scancentral",
+  "name": "gha-setup-scancentral-client",
   "version": "1.2.0",
   "description": "GitHub Action for setting up Fortify ScanCentral Client",
   "main": "dist/index.js",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fortify-actions/setup-scancentral.git"
+    "url": "git+https://github.com/fortify/gha-setup-scancentral-client.git"
   },
   "keywords": [
     "Fortify",
@@ -25,9 +25,9 @@
   "author": "Ruud Senden",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fortify-actions/setup-scancentral/issues"
+    "url": "https://github.com/fortify/gha-setup-scancentral-client/issues"
   },
-  "homepage": "https://github.com/fortify-actions/setup-scancentral#readme",
+  "homepage": "https://github.com/fortify/gha-setup-scancentral-client#readme",
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/tool-cache": "^1.6.1",
