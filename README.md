@@ -23,7 +23,7 @@ jobs:
   Fortify-SAST:
     # Use the appropriate runner for building your source code
     runs-on: ubuntu-latest 
-	
+
     steps:
       # Check out source code
       - name: Check Out Source Code
@@ -34,10 +34,10 @@ jobs:
       # If this run was triggered by a pull request event, then checkout the head of the pull request instead of the merge commit.
       - run: git checkout HEAD^2
         if: ${{ github.event_name == 'pull_request' }} 
-		
+
       # Java is required to run ScanCentral Client, and may be required for your build
-	  # Java version to use depends on the Java version required to run your build (if any),
-	  # and the Java version supported by the ScanCentral Client version that you are running
+      # Java version to use depends on the Java version required to run your build (if any),
+      # and the Java version supported by the ScanCentral Client version that you are running
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
