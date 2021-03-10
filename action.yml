@@ -5,7 +5,7 @@ inputs:
   version:
     description: 'Fortify ScanCentral Client version to use'
     required: true
-    default: 20.1.0
+    default: 20.2.0
   client-auth-token:
     description: 'ScanCentral client authentication token'
     required: false
