@@ -1,6 +1,6 @@
 {
   "name": "setup-scancentral",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "GitHub Action for setting up Fortify ScanCentral Client",
   "main": "dist/index.js",
   "scripts": {
