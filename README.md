@@ -45,7 +45,7 @@ jobs:
 
       ### Set up Fortify ScanCentral Client ###
       - name: Download Fortify ScanCentral Client
-      - uses: fortify/gha-setup-scancentral-client@v1.1.1   
+        uses: fortify/gha-setup-scancentral-client@v1.1.1   
         with:
           version: 20.2.0                                      # Optional as 20.2.0 is the default
           client-auth-token: ${{ secrets.CLIENT_AUTH_TOKEN }}  # Optional, but required if ScanCentral Controller requires client authentication
@@ -55,7 +55,7 @@ jobs:
       #   ScanCentral Client will download dependencies for maven, gradle and msbuild projects.
       #   For other build tools, add your build commands to the workflow to download necessary dependencies and prepare according to Fortify SCA documentation.
       - name: Perform SAST Scan
-      - run: scancentral -url ${URL} start $BUILD_OPTS -upload -application $APPLICATION -version $VERSION -uptoken $TOKEN
+        run: scancentral -url ${URL} start $BUILD_OPTS -upload -application $APPLICATION -version $VERSION -uptoken $TOKEN
         env:                                            
           URL: ${{ secrets.SSC_URL }}
           TOKEN: ${{ secrets.SSC_UPLOAD_TOKEN }}
@@ -65,7 +65,7 @@ jobs:
 
       ### Archive ScanCentral Client logs on failure ###
       - name: Save ScanCentral Logs
-      - uses: actions/upload-artifact@v2                
+        uses: actions/upload-artifact@v2                
         if: failure()
         with:
            name: scancentral-logs
