@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.3.1](https://www.github.com/fortify/gha-setup-scancentral-client/compare/v1.3.0...v1.3.1) (2021-08-25)
+
+
+### Bug Fixes
+
+* Documentation: Add recommendation that on-premise customers should explicitly configure the ScanCentral Client version to be installed by this action, rather than relying on the default version ([7cdff21](https://www.github.com/fortify/gha-setup-scancentral-client/commit/7cdff2198f4602337bd4f249caad809718019bf3))
+
 ## [1.3.0](https://www.github.com/fortify/gha-setup-scancentral-client/compare/v1.2.0...v1.3.0) (2021-08-25)
 
 
