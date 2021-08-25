@@ -45,9 +45,9 @@ jobs:
 
       ### Set up Fortify ScanCentral Client ###
       - name: Download Fortify ScanCentral Client
-        uses: fortify/gha-setup-scancentral-client@v1.1.1   
+        uses: fortify/gha-setup-scancentral-client@v1   
         with:
-          version: 20.2.0                                      # Optional as 20.2.0 is the default
+          version: 21.1.2                                      # Optional as 21.1.2 is the default
           client-auth-token: ${{ secrets.CLIENT_AUTH_TOKEN }}  # Optional, but required if ScanCentral Controller requires client authentication
 
       ### Run Fortify ScanCentral Client ###
@@ -74,7 +74,7 @@ jobs:
 
 This example workflow demonstrates the use of the `fortify/gha-setup-scancentral-client` action to set up ScanCentral Client, and then invoking ScanCentral Client similar to how you would manually 
 run this command from a command line. You can run any available client action like `start` or `package`, and even invoke the other commands shipped with ScanCentral Client like `pwtool`. Please
-see the [ScanCentral documentation](https://www.microfocus.com/documentation/fortify-software-security-center/2010/ScanCentral_Help_20.1.0/index.htm#Submit_Job.htm%3FTocPath%3DSubmitting%2520Scan%2520Requests%7C_____0)
+see the [ScanCentral documentation](https://www.microfocus.com/documentation/fortify-software-security-center/2110/SC_SAST_Help_21.1.0/index.htm#Submit_Job.htm)
 for details. All potentially sensitive data should be stored in the GitHub secrets storage.
 
 Following are the most common use cases for this GitHub Action:
@@ -94,10 +94,13 @@ Following are the most common use cases for this GitHub Action:
 ## Inputs
 
 ### `version`
-**Required** The version of the Fortify ScanCentral Client to be set up. Default if not specified is `20.2.0`. At the time of writing, the following versions are available:
+**Optional** The version of the Fortify ScanCentral Client to be set up. At the time of writing, the following versions are available:
 
+* `21.1.2` (default if not specified)
 * `20.2.0`
 * `20.1.0`
+
+If you plan on using ScanCentral Client just for packaging your source code to be submitted to Fortify on Demand, it is recommended to use the default/latest version. If you plan on using ScanCentral Client to submit scan requests to a ScanCentral environment, the ScanCentral Client version should match the versions of your ScanCentral Controller and Sensors as closely as possible. Please see the ScanCentral documentation for exact version requirements.
 
 ### `client-auth-token`
 **Optional** Client authentication token to pass to ScanCentral Controller. Required if ScanCentral Controller accepts authorized clients only.
