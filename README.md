@@ -48,7 +48,7 @@ jobs:
         uses: fortify/gha-setup-scancentral-client@v1   
         with:
           version: 21.1.2                                      # On-prem customers should specify a client version that matches their ScanCentral environment
-	                                                       # FoD customers usually should not specify a version but rather rely on the default version
+                                                               # FoD customers usually should not specify a version but rather rely on the default version
           client-auth-token: ${{ secrets.CLIENT_AUTH_TOKEN }}  # Optional, but required if ScanCentral Controller requires client authentication
 
       ### Run Fortify ScanCentral Client ###
