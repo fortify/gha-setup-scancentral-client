@@ -101,7 +101,9 @@ Following are the most common use cases for this GitHub Action:
 * `20.2.0`
 * `20.1.0`
 
-If you plan on using ScanCentral Client just for packaging your source code to be submitted to Fortify on Demand, it is recommended to use the default/latest version. If you plan on using ScanCentral Client to submit scan requests to a ScanCentral environment, the ScanCentral Client version should match the versions of your ScanCentral Controller and Sensors as closely as possible. As such it is recommended to explicitly specify the ScanCentral Client version to be used, rather than relying on the default version installed by this GitHub Action. Please see the ScanCentral documentation for exact version requirements.
+If you plan on using ScanCentral Client just for packaging your source code to be submitted to Fortify on Demand, it is recommended to not specify this input in your workflow, in order to rely on the default/latest version. 
+
+If you plan on using ScanCentral Client to submit scan requests to a ScanCentral environment, the ScanCentral Client version should match the versions of your ScanCentral Controller and Sensors as closely as possible. As such it is recommended to explicitly specify the ScanCentral Client version to be used rather than relying on the default version installed by this GitHub Action, as the default version may change in future versions of this Github Action. Please see the ScanCentral documentation for exact version requirements.
 
 ### `client-auth-token`
 **Optional** Client authentication token to pass to ScanCentral Controller. Required if ScanCentral Controller accepts authorized clients only.
