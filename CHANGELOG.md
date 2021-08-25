@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/fortify/gha-setup-scancentral-client/compare/v1.2.0...v1.3.0) (2021-08-25)
+
+
+### Features
+
+* Update default version to 21.1.2 ([246c1e8](https://www.github.com/fortify/gha-setup-scancentral-client/commit/246c1e87a794d486894055aeae6629f989d3f339))
+
+
+### Bug Fixes
+
+* Documentation: Use ScanCentral Controller URL for `-url` option rather than SSC URL (for SSC URL, `-sscurl` option should be used instead) ([1a3b928](https://www.github.com/fortify/gha-setup-scancentral-client/commit/1a3b9283fdb6f58e2f10a39cff4fe390b2377ce1))
+
 ## [1.2.0](https://www.github.com/fortify/gha-setup-scancentral-client/compare/v1.1.1...v1.2.0) (2021-03-10)
 
 
