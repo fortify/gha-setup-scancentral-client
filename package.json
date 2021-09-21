@@ -6,12 +6,8 @@
   "scripts": {
     "build": "ncc build src/main.ts",
     "lint": "eslint . --ext .ts,.tsx",
-    "format": "prettier --write **/*.ts"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run build && git add dist/"
-    }
+    "format": "prettier --write **/*.ts",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -29,18 +25,18 @@
   },
   "homepage": "https://github.com/fortify/gha-setup-scancentral-client#readme",
   "dependencies": {
-    "@actions/core": "^1.2.6",
-    "@actions/tool-cache": "^1.6.1",
-    "fs-extra": "^9.1.0",
+    "@actions/core": "^1.5.0",
+    "@actions/tool-cache": "^1.7.1",
+    "fs-extra": "^10.0.0",
     "path": "^0.12.7"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.8",
-    "@types/node": "^14.14.33",
-    "@vercel/ncc": "^0.27.0",
-    "eslint": "^7.21.0",
-    "husky": "^4.3.8",
-    "prettier": "^2.2.1",
-    "typescript": "^4.2.3"
+    "@types/fs-extra": "^9.0.12",
+    "@types/node": "^16.9.4",
+    "@vercel/ncc": "^0.31.1",
+    "eslint": "^7.32.0",
+    "husky": "^7.0.0",
+    "prettier": "^2.4.0",
+    "typescript": "^4.4.3"
   }
 }

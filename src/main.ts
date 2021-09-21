@@ -68,8 +68,8 @@ async function main(): Promise<void> {
     await addClientProperties(toolDir);
     const toolBinDir = path.join(toolDir, 'bin');
     core.addPath(toolBinDir);
-  } catch (error) {
-    core.setFailed(error.message);
+  } catch (err) {
+    core.setFailed("Action failed with error ${err}");
   } finally {
     core.endGroup();
   }
