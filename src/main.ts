@@ -69,7 +69,7 @@ async function main(): Promise<void> {
     const toolBinDir = path.join(toolDir, 'bin');
     core.addPath(toolBinDir);
   } catch (err) {
-    core.setFailed("Action failed with error ${err}");
+    core.setFailed("Action failed with error: "+err);
   } finally {
     core.endGroup();
   }

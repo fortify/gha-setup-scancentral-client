@@ -8608,7 +8608,7 @@ function main() {
             core.addPath(toolBinDir);
         }
         catch (err) {
-            core.setFailed("Action failed with error ${err}");
+            core.setFailed("Action failed with error: " + err);
         }
         finally {
             core.endGroup();
