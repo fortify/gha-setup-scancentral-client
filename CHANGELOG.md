@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://www.github.com/fortify/gha-setup-scancentral-client/compare/v2.1.1...v2.2.0) (2022-08-29)
+
+
+### Features
+
+* Update default ScanCentral Client version to 22.1.0 ([52f0584](https://www.github.com/fortify/gha-setup-scancentral-client/commit/52f0584bcc94f17c41db1ceec304e6c3462c83e7))
+
 ### [2.1.1](https://www.github.com/fortify/gha-setup-scancentral-client/compare/v2.1.0...v2.1.1) (2022-08-29)
 
 
