@@ -1,5 +1,13 @@
 # Changelog
 
+### [2.1.1](https://www.github.com/fortify/gha-setup-scancentral-client/compare/v2.1.0...v2.1.1) (2022-08-29)
+
+
+### Bug Fixes
+
+* Display actual error ([2a17499](https://www.github.com/fortify/gha-setup-scancentral-client/commit/2a174995a59f14f7854ae64742739f907167a82c))
+* Update dependencies ([7c6e021](https://www.github.com/fortify/gha-setup-scancentral-client/commit/7c6e021be0153f045d1843d0f4eca0a428cea527))
+
 ## [2.1.0](https://www.github.com/fortify/gha-setup-scancentral-client/compare/v2.0.0...v2.1.0) (2021-12-20)
 
 
