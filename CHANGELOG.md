@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.1](https://www.github.com/fortify/gha-setup-scancentral-client/compare/v2.2.0...v2.2.1) (2022-09-14)
+
+
+### Bug Fixes
+
+* Workaround for https://github.com/actions/toolkit/issues/1179 ([841b172](https://www.github.com/fortify/gha-setup-scancentral-client/commit/841b1729d6c19bfe3dbc2f8d5850d258b02ebb74))
+
 ## [2.2.0](https://www.github.com/fortify/gha-setup-scancentral-client/compare/v2.1.1...v2.2.0) (2022-08-29)
 
 
