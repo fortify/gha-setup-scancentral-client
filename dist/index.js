@@ -10291,10 +10291,18 @@ const IS_WINDOWS = process.platform === 'win32';
 function getDownloadUrl(version) {
     return 'https://tools.fortify.com/scancentral/Fortify_ScanCentral_Client_' + version + '_x64.zip';
 }
+function addExtension(filePath, extension) {
+    var newFilePath = filePath;
+    if (!filePath.endsWith(extension)) {
+        var newFilePath = newFilePath + extension;
+        fs.renameSync(filePath, newFilePath);
+    }
+    return newFilePath;
+}
 function downloadAndExtract(url) {
     return __awaiter(this, void 0, void 0, function* () {
         core.debug("Downloading " + url);
-        const toolZip = yield tc.downloadTool(url);
+        const toolZip = addExtension(yield tc.downloadTool(url), ".zip");
         core.debug("Extracting " + toolZip);
         const extractPath = yield tc.extractZip(toolZip);
         return extractPath;

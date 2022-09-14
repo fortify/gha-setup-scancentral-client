@@ -12,9 +12,18 @@ function getDownloadUrl(version: string): string {
   return 'https://tools.fortify.com/scancentral/Fortify_ScanCentral_Client_' + version + '_x64.zip';
 }
 
+function addExtension(filePath: string, extension: string): string {
+  var newFilePath = filePath;
+  if ( !filePath.endsWith(extension) ) {
+    var newFilePath = newFilePath + extension;
+    fs.renameSync(filePath, newFilePath);
+  }
+  return newFilePath;
+}
+
 async function downloadAndExtract(url: string): Promise<string> {
   core.debug("Downloading " + url);
-  const toolZip = await tc.downloadTool(url);
+  const toolZip = addExtension(await tc.downloadTool(url), ".zip");
   core.debug("Extracting " + toolZip);
   const extractPath = await tc.extractZip(toolZip);
   return extractPath;
