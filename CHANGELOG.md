@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.2](https://www.github.com/fortify/gha-setup-scancentral-client/compare/v2.2.1...v2.2.2) (2022-10-21)
+
+
+### Bug Fixes
+
+* Fix GitHub NodeJS 12 deprecation warning ([98d5814](https://www.github.com/fortify/gha-setup-scancentral-client/commit/98d581414b4b3b314ed9dfe1df0a8b8363b086c0))
+
 ### [2.2.1](https://www.github.com/fortify/gha-setup-scancentral-client/compare/v2.2.0...v2.2.1) (2022-09-14)
 
 
