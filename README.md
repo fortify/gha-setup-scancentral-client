@@ -47,7 +47,7 @@ jobs:
       - name: Download Fortify ScanCentral Client
         uses: fortify/gha-setup-scancentral-client@v1   
         with:
-          version: 21.2.0                                      # On-prem customers should specify a client version that matches their ScanCentral environment
+          version: 23.1.0                                      # On-prem customers should specify a client version that matches their ScanCentral environment
                                                                # FoD customers usually should not specify a version but rather rely on the default version
           client-auth-token: ${{ secrets.CLIENT_AUTH_TOKEN }}  # Optional, but required if ScanCentral Controller requires client authentication
 
@@ -75,7 +75,7 @@ jobs:
 
 This example workflow demonstrates the use of the `fortify/gha-setup-scancentral-client` action to set up ScanCentral Client, and then invoking ScanCentral Client similar to how you would manually 
 run this command from a command line. You can run any available client action like `start` or `package`, and even invoke the other commands shipped with ScanCentral Client like `pwtool`. Please
-see the [ScanCentral documentation](https://www.microfocus.com/documentation/fortify-software-security-center/2110/SC_SAST_Help_21.1.0/index.htm#Submit_Job.htm)
+see the [ScanCentral documentation](https://www.microfocus.com/documentation/fortify-software-security-center/2310/SC_SAST_Help_23.1.0/index.htm)
 for details. All potentially sensitive data should be stored in the GitHub secrets storage.
 
 Following are the most common use cases for this GitHub Action:
@@ -97,10 +97,10 @@ Following are the most common use cases for this GitHub Action:
 ### `version`
 **Optional** The version of the Fortify ScanCentral Client to be set up. At the time of writing, the following versions are available:
 
-* `21.2.0` (default if not specified)
-* `21.1.2` 
-* `20.2.0`
-* `20.1.0`
+* `23.1.0` (default if not specified)
+* `22.2.1` 
+* `22.1.2`
+* `21.2.3`
 
 If you plan on using ScanCentral Client just for packaging your source code to be submitted to Fortify on Demand, it is recommended to not specify this input in your workflow, in order to rely on the default/latest version. 
 
