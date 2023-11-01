@@ -1,3 +1,7 @@
+# Deprecation Notice
+
+This GitHub Action has been deprecated and will no longer be maintained as of December 31st, 2023. Similar functionality is now available through the consolidated [fortify/github-action](https://github.com/marketplace/actions/fortify-ast-scan) and its sub-actions; please update your GitHub workflows to use these actions instead.
+
 # Setup Fortify ScanCentral Client
 
 Build secure software fast with [Fortify](https://www.microfocus.com/en-us/solutions/application-security). Fortify offers end-to-end application security solutions with the flexibility of testing on-premises and on-demand to scale and cover the entire software development lifecycle.  With Fortify, find security issues early and fix at the speed of DevOps. This GitHub Action sets up the Fortify ScanCentral Client to integrate Static Application Security Testing (SAST) into your GitHub workflows. This action:
